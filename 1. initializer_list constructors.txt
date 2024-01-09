@@ -1,0 +1,76 @@
+1. Creating own initializer_list
+2. Aggregate initialization, All three are called uniform initialization.
+3. Uniform initialization search order
+    1. Initialization_list constructor.
+    2. Regular constructor that takes the appropriate parameters.
+    3. Aggregate initializer.
+
+#---------------- initialization list in C++ ----------------------#
+
+#include <initializer_list>
+
+1. Creating our own initializer_list for user defined data types -------------------------------#
+
+class boVector{
+    vector<int> my_vec;
+    public:
+    boVector(const initializer_list<int>& v){
+        for(cont initializer_list<int>::iterator it = v.begin(); it!=v.end(); ++it){
+            my_vec.push_back(*it);
+        }
+    }
+};
+
+int main(){
+    boVector v = {1, 2, 3}; // This is same as
+    bovector v1{1, 2, 3};
+}
+
+2. Aggregate initialization -----------------------------------------------------------------#
+
+class dog{
+    int id;
+    string name;
+};
+
+dog d1{1, "Dogname"};   // Aggregate initialization
+
+3. Regular constructor that takes the appropriate parameters---------------------------------#
+
+class dog{
+public:
+    int id;
+    string name;
+    dog(int id, string name){
+        this->id = id;
+        this->name = name;
+    }
+};
+
+dog d1{1, "name2"}  
+
+
+#---------------IMPORTANT-------------#
+
+All three types of object initialization using curly braces does the same thing.
+But for complier, All three will have different priority.
+
+# Uniform initialization search order
+    1. Initialization_list constructor.
+    2. Regular constructor that takes the appropriate parameters.
+    3. Aggregate initializer.
+
+dof d1{3};
+
+class dog{
+    public:
+    int id;                                 // 3rd choice
+
+    dog(int id){                            // 2nd choice
+        this->id = id;
+    }
+
+    dog(const initializer_list<int>& vec){  // 1st choice
+        this->id = *(vec.begin());  
+    }
+};
