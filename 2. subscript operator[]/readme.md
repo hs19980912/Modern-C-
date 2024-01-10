@@ -16,3 +16,19 @@ Output:
   a[1] = 20
   a[2] = 30
 ```
+
+### C++ supports positive and negative subscripts
+However, negative subscripts must fall within array boundaries; if they do not, the results are unpredictable.
+```cpp
+int main() {
+    int intArray[1024];
+    for (int i = 0, j = 0; i < 1024; i++){
+        intArray[i] = j++;
+    }
+    cout << intArray[512] << endl;   // 512
+    cout << 257[intArray] << endl;   // 257
+    int *midArray = &intArray[512];  // pointer to the middle of the array
+    cout << midArray[-256] << endl;  // 256
+    cout << intArray[-256] << endl;  // unpredictable, may crash
+}
+```
